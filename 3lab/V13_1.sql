@@ -2,7 +2,7 @@ USE AdventureWorks2012;
 GO
 
 ALTER TABLE [dbo].[Address]
-ADD AddressType NVARCHAR(50);
+  ADD AddressType NVARCHAR(50);
 GO
 
 DECLARE @AddressVar TABLE
@@ -13,20 +13,20 @@ DECLARE @AddressVar TABLE
     City NVARCHAR(30) NULL,
     StateProvinceID INT NOT NULL,
     PostalCode NVARCHAR(15) NOT NULL,
-	ModifiedDate DATETIME NOT NULL,
-	AddressType NVARCHAR(50)
+    ModifiedDate DATETIME NOT NULL,
+    AddressType NVARCHAR(50)
 );
 INSERT INTO
     @AddressVar
     (
-		AddressID,
-		AddressLine1,
-		AddressLine2,
-		City,
-		StateProvinceID,
-		PostalCode,
-		ModifiedDate,
-		AddressType
+	AddressID,
+	AddressLine1,
+	AddressLine2,
+	City,
+	StateProvinceID,
+	PostalCode,
+	ModifiedDate,
+	AddressType
     )
 SELECT
 	a.AddressID,
@@ -41,8 +41,8 @@ FROM
     [dbo].[Address] as a
 	LEFT JOIN Person.BusinessEntityAddress
         ON (a.[AddressID] = [Person].[BusinessEntityAddress].[AddressID])
-	LEFT JOIN Person.AddressType as b
-        ON (Person.BusinessEntityAddress.AddressTypeID = b.AddressTypeID)
+	    LEFT JOIN Person.AddressType as b
+            ON (Person.BusinessEntityAddress.AddressTypeID = b.AddressTypeID)
 
 UPDATE
     [dbo].[Address]
@@ -72,7 +72,7 @@ DROP COLUMN
 ALTER TABLE
     [dbo].[Address]
 DROP CONSTRAINT
-	AK_Address_PostalCode,
+    AK_Address_PostalCode,
     DF_Address_ModifiedDate
 GO
 

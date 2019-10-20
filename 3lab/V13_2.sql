@@ -5,7 +5,7 @@ ALTER TABLE
     dbo.Address
 ADD
     CountryRegionCode NVARCHAR(3),
-	TaxRate SMALLMONEY,
+    TaxRate SMALLMONEY,
     DiffMin AS (TaxRate - 5.00);
 GO
 
@@ -14,19 +14,19 @@ CREATE TABLE #Address (
     AddressID INT NOT NULL PRIMARY KEY,
     AddressLine1 NVARCHAR(60) NOT NULL,
     AddressLine2 NVARCHAR(60) NULL,
-	City NVARCHAR(25) NULL,
-	StateProvinceID INT NOT NULL,
-	PostalCode NVARCHAR(15) NOT NULL,
+    City NVARCHAR(25) NULL,
+    StateProvinceID INT NOT NULL,
+    PostalCode NVARCHAR(15) NOT NULL,
     ModifiedDate DATETIME NOT NULL,
-	CountryRegionCode NVARCHAR(3),
-	TaxRate SMALLMONEY,
+    CountryRegionCode NVARCHAR(3),
+    TaxRate SMALLMONEY,
 );
 GO
 
 
 WITH TaxRate_CTE(StateProvinceID,TaxRate) AS (
     SELECT
-		StateProvinceID,
+	StateProvinceID,
         TaxRate
     FROM
         Sales.SalesTaxRate
@@ -35,25 +35,25 @@ WITH TaxRate_CTE(StateProvinceID,TaxRate) AS (
 )
 INSERT INTO #Address  (
         AddressID,
-		AddressLine1,
-		AddressLine2,
-		City,
-		StateProvinceID,
-		PostalCode,
-		ModifiedDate,
-		CountryRegionCode,
-		TaxRate
+	AddressLine1,
+	AddressLine2,
+	City,
+	StateProvinceID,
+	PostalCode,
+	ModifiedDate,
+	CountryRegionCode,
+	TaxRate
     )
 SELECT
-		a.AddressID,
-		a.AddressLine1,
-		a.AddressLine2,
-		a.City,
-		a.StateProvinceID,
-		a.PostalCode,
-		a.ModifiedDate,
-		b.CountryRegionCode,
-		d.TaxRate
+	a.AddressID,
+	a.AddressLine1,
+	a.AddressLine2,
+	a.City,
+	a.StateProvinceID,
+	a.PostalCode,
+	a.ModifiedDate,
+	b.CountryRegionCode,
+	d.TaxRate
 FROM
     [dbo].[Address] as a
     INNER JOIN Person.StateProvince as b
@@ -88,9 +88,9 @@ WHEN NOT MATCHED BY target THEN
         AddressLine2,
         City,
         StateProvinceID,
-		PostalCode,
-		ModifiedDate,
-		CountryRegionCode,
+	PostalCode,
+	ModifiedDate,
+	CountryRegionCode,
         TaxRate
     )
     VALUES
@@ -100,9 +100,9 @@ WHEN NOT MATCHED BY target THEN
         AddressLine2,
         City,
         StateProvinceID,
-		PostalCode,
-		ModifiedDate,
-		CountryRegionCode,
+	PostalCode,
+	ModifiedDate,
+	CountryRegionCode,
         TaxRate
     )
 WHEN NOT MATCHED BY source THEN

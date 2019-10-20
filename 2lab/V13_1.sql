@@ -1,14 +1,14 @@
 select
-	HumanResources.Employee.BusinessEntityID,
-	HumanResources.Employee.JobTitle,
+	a.BusinessEntityID,
+	a.JobTitle,
 	HumanResources.Department.DepartmentID,
 	HumanResources.Department.Name
 from 
-	((HumanResources.Employee
-		inner join HumanResources.EmployeeDepartmentHistory
-		on HumanResources.Employee.BusinessEntityID = HumanResources.EmployeeDepartmentHistory.BusinessEntityID)
+	((HumanResources.Employee as a
+		inner join HumanResources.EmployeeDepartmentHistory as b
+		on a.HireDate = b.StartDate and a.BusinessEntityID = b.BusinessEntityID)
 	inner join HumanResources.Department
-	on HumanResources.EmployeeDepartmentHistory.DepartmentID = HumanResources.Department.DepartmentID)
+	on b.DepartmentID = HumanResources.Department.DepartmentID)
 
 
 select
